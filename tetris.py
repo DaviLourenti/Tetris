@@ -90,36 +90,38 @@ def main():
             if evento.type == pygame.QUIT:
                 rodando = False
                 pygame.quit()
-                quit()
-
-            if evento.type == pygame.KEYDOWN:
-
-                if evento.key == pygame.K_SPACE:
-                    f.bloco1.baladinha_bloco()
-                    f.bloco2.baladinha_bloco()
-                    f.bloco3.baladinha_bloco()
-                    f.bloco4.baladinha_bloco()
-                
-                if evento.key == pygame.K_RIGHT:
-                    f.mover_direita()
-                
-                if evento.key == pygame.K_LEFT:
-                    f.mover_esquerda()
-                
-                if evento.key == pygame.K_UP:
-                    f.girar()
-
-            #acelerar a decida
-            tecla = pygame.key.get_pressed()
-            if tecla[pygame.K_DOWN]:
-                tick_do_relogio = 300
+            
             else:
-                tick_do_relogio = 30
+                if evento.type == pygame.KEYDOWN:
+
+                    if evento.key == pygame.K_SPACE:
+                        f.bloco1.baladinha_bloco()
+                        f.bloco2.baladinha_bloco()
+                        f.bloco3.baladinha_bloco()
+                        f.bloco4.baladinha_bloco()
+                    
+                    if evento.key == pygame.K_RIGHT:
+                        f.mover_direita()
+                    
+                    if evento.key == pygame.K_LEFT:
+                        f.mover_esquerda()
+                    
+                    if evento.key == pygame.K_UP:
+                        f.girar()
+
+                #acelerar a decida
+                tecla = pygame.key.get_pressed()
                 
-        aglomeração.conferir_e_lipar_linha()
-        desenhar_tela(tela, f, cenario, aglomeração)
+                if tecla[pygame.K_DOWN]:
+                    tick_do_relogio = 300
+                else:
+                    tick_do_relogio = 30
+        
+        if rodando == True:        
+            aglomeração.conferir_e_lipar_linha()
+            desenhar_tela(tela, f, cenario, aglomeração)
 
 
 
 if __name__ == '__main__':
-    print("> [tetris] para jogar execute o arquivo index.py")
+    print("(tetris) >> para jogar execute o arquivo index.exe ou index.py num compilador python")
