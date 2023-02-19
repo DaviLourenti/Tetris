@@ -1,5 +1,5 @@
-import tetris
+import func_principal
 
-game = tetris
+game = func_principal
 game.main()
 
