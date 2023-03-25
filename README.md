@@ -16,4 +16,4 @@ ex de funcinamento de coodernadas padrão das formas:
     
     girando:     [ 5]
              [14][15]
-                 [25]                 
+                 [25]   
