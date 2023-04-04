@@ -1,19 +1,7 @@
-# nota 
-
-foi mal ae Otavio pela demora, eu tava tendo umas crises existenciais..
-mas enfim aqui esta a versão minimamente jogavel do Tetris que eu fiz usando a biblioteca pygame, espero que goste!
-aé, tenta ignorar uns erros do codigo, eu inda vou corrigir isso..
-
 # Tetris
-um dia eu tava entediado e sem internet, então eu fiz um tetris no papel, agora eu to tentando fazer no computador.
+Um dia eu tava entediado e sem internet, então eu fiz um tetris no papel, fiz uma versão pré-historica no computador (que só roda no terminal), 
+e finalmente depois de tomar coragem eu fiz um joguinho do tetris de verdade, só tenho que atualizar/adicionar algumas coisas e corrigir alguns bugs.
 
-ex de funcinamento de coodernadas padrão das formas:
+### Video demonstrativo haha 😆:
 
-    exemplo: t_form = [14, 15, 16, 25] 15 é o valor de refecencia
-    
-    ou seja: [14][15][16] 
-                 [25]
-    
-    girando:     [ 5]
-             [14][15]
-                 [25]   
+![ezgif com-optimize](https://user-images.githubusercontent.com/96353013/229895466-544be0b6-26a9-4f04-9e21-27b146ab4e40.gif)
