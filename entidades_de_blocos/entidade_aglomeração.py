@@ -45,11 +45,7 @@ class Aglomeração:
                         self.x_ocupados = []
                         self.index_ocupados = []
                         break
-
-        # if len(self.y_ocupados) >= 3:
-        #     for a in range(0, len(self.conjunto_de_blocos)):
-        #         self.conjunto_de_blocos.pop(0)
-        #         self.y_ocupados = []
+                    
 
     def desenhar(self, tela):
         for c in range(0, len(self.conjunto_de_blocos)):

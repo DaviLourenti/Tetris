@@ -18,7 +18,8 @@ def main():
               tipos_de_formas.Forma_J, 
               tipos_de_formas.Forma_L
               ]
-    f = formas[-2](entidades_de_blocos.Bloco, aglomeração)
+    f = formas[-2](aglomeração)
+    #f.add_agromeração()
     
     tela = pygame.display.set_mode((display.TELA_LARGURA, display.TELA_ALTURA))
     relogio = pygame.time.Clock()
@@ -31,7 +32,7 @@ def main():
         #restartando o player
         if f.colisão == True:
             aglomeração.aglomerar_forma(f)
-            f = formas[random.randint(0, len(formas)-1)](entidades_de_blocos.Bloco, aglomeração)
+            f = formas[random.randint(0, len(formas)-1)](aglomeração)
             
         #tempo de sincronização do jogo
         relogio.tick(tick_do_relogio)

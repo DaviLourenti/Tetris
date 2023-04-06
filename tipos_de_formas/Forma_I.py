@@ -1,8 +1,8 @@
 import entidades_de_blocos
 
 class Forma_I(entidades_de_blocos.Forma):
-    def __init__(self, Bloco, aglomeração):
-        super().__init__(Bloco, 225, 250, 225, 275, 225, 300, 225, 325, aglomeração)
+    def __init__(self, aglomeração):
+        super().__init__(225, 250, 225, 275, 225, 300, 225, 325, aglomeração)
     
     def girar(self):
         if self.giro == 0:
