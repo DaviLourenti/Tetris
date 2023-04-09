@@ -1,3 +1,4 @@
+from random import randint
 from . import entidade_bloco
 class Forma:
     def __init__(self, x1,y1, x2,y2, x3,y3, x4,y4, aglomeração):
@@ -6,11 +7,13 @@ class Forma:
         self.colisão = False
         self.conexão_com_player = True
         self.conjunto_de_blocos = aglomeração.conjunto_de_blocos
+        self.cor = randint(0, 5)
         
-        self.bloco1 = entidade_bloco.Bloco(x1, y1)
-        self.bloco2 = entidade_bloco.Bloco(x2, y2)
-        self.bloco3 = entidade_bloco.Bloco(x3, y3)
-        self.bloco4 = entidade_bloco.Bloco(x4, y4)
+        
+        self.bloco1 = entidade_bloco.Bloco(x1, y1, self.cor)
+        self.bloco2 = entidade_bloco.Bloco(x2, y2, self.cor)
+        self.bloco3 = entidade_bloco.Bloco(x3, y3, self.cor)
+        self.bloco4 = entidade_bloco.Bloco(x4, y4, self.cor)
 
     def bool_colisão_direita(self):
         for c in range(0, len(self.conjunto_de_blocos)):

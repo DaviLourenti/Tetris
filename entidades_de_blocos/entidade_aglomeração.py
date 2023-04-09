@@ -2,7 +2,8 @@ class Aglomeração:
     def __init__(self):
 
         self.conjunto_de_blocos = []
-        self.index_ocupados = []
+        self.indices_da_linha = []
+
 
     def aglomerar_forma(self, forma):
         self.conjunto_de_blocos += [forma.bloco1]
@@ -12,38 +13,44 @@ class Aglomeração:
 
         forma.conexão_com_player = False
 
-    def puxar_tudo_pra_baixo(self):
-        for c in range(0, len(self.conjunto_de_blocos)):
+
+    def __puxar_tudo_pra_baixo(self):
+        for c in range(len(self.conjunto_de_blocos)):
+            #if self.conjunto_de_blocos[c].y < y_linha_excluida:
             self.conjunto_de_blocos[c].y += 25
 
-    def conferir_e_lipar_linha(self):
-        self.y_ocupados = []
 
-        for c in range(0, len(self.conjunto_de_blocos)):
-            self.y_ocupados += [self.conjunto_de_blocos[c].y]
+    def __apagar_linha(self):
+        self.indices_da_linha.sort()
+        self.indices_da_linha.reverse()
+        
+        for i in range(len(self.x_preenchidos)):
+            self.conjunto_de_blocos.pop(self.indices_da_linha[i])
+        
+        self.x_preenchidos = []
+        self.indices_da_linha = []
 
-        self.y_ocupados = list(set(self.y_ocupados))
-        for c in range(0, len(self.y_ocupados)):
-            self.x_ocupados = []
-            self.index_ocupados = []
 
-            for c2 in range(0, len(self.conjunto_de_blocos)):
+    def conferir_linha(self):
+        self.y_preenchidos = list(set([item.y for item in self.conjunto_de_blocos]))
+        
+        for c in range(len(self.y_preenchidos)): #verifivação de linha em linha 
+            
+            self.x_preenchidos = []
+            self.indices_da_linha = []
 
-                if self.conjunto_de_blocos[c2].y == self.y_ocupados[c]\
-                        and self.conjunto_de_blocos[c2].x not in self.x_ocupados:
-                    self.x_ocupados += [self.conjunto_de_blocos[c2].x]
-                    self.index_ocupados += [c2]
+            for c2 in range(len(self.conjunto_de_blocos)): #procurando uma sequencia de 18 blocos seguidos na mesma linha
+                
+                if self.conjunto_de_blocos[c2].y == self.y_preenchidos[c] and self.conjunto_de_blocos[c2].x not in self.x_preenchidos:
 
-                    if len(self.x_ocupados) == 18:
-                        self.index_ocupados.sort()
-                        self.index_ocupados.reverse()
+                    self.x_preenchidos.append(self.conjunto_de_blocos[c2].x)
+                    self.indices_da_linha.append(c2)
 
-                        for a in range(0, len(self.x_ocupados)):
-                            self.conjunto_de_blocos.pop(self.index_ocupados[a])
+                    if len(self.x_preenchidos) == 18:
 
-                        self.puxar_tudo_pra_baixo()
-                        self.x_ocupados = []
-                        self.index_ocupados = []
+                        self.__apagar_linha()
+                        self.__puxar_tudo_pra_baixo()
+                        
                         break
                     
 

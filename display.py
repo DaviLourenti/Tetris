@@ -5,14 +5,6 @@ import pygame
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
-IMAGENS_BLOCO = [
-    pygame.image.load(os.path.join('imagens', 'bloco_azul.jpg')),
-    pygame.image.load(os.path.join('imagens', 'bloco_vermelho.jpg')),
-    pygame.image.load(os.path.join('imagens', 'bloco_amarelo.jpg')),
-    pygame.image.load(os.path.join('imagens', 'bloco_verde.jpg')),
-    pygame.image.load(os.path.join('imagens', 'bloco_rosa.jpg')),
-    pygame.image.load(os.path.join('imagens', 'bloco_roxo.jpg')),
-]
 IMAGEM_FUNDO = pygame.image.load(os.path.join('imagens', 'fundo.png'))
 IMAGEM_CENARIO = pygame.image.load(os.path.join('imagens', 'cenario.png'))
 

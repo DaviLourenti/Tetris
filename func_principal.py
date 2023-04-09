@@ -19,12 +19,11 @@ def main():
               tipos_de_formas.Forma_L
               ]
     f = formas[-2](aglomeração)
-    #f.add_agromeração()
     
     tela = pygame.display.set_mode((display.TELA_LARGURA, display.TELA_ALTURA))
     relogio = pygame.time.Clock()
-
     tick_do_relogio = 30
+    
     rodando = True
 
     while rodando:
@@ -72,7 +71,7 @@ def main():
                     tick_do_relogio = 30
         
         if rodando == True:        
-            aglomeração.conferir_e_lipar_linha()
+            aglomeração.conferir_linha()
             display.desenhar_tela(tela, f, cenario, aglomeração)
 
 
