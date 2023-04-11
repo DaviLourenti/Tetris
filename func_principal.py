@@ -18,22 +18,37 @@ def main():
               tipos_de_formas.Forma_J, 
               tipos_de_formas.Forma_L
               ]
-    f = formas[-2](aglomeração)
+    forma_aleatoria = random.randint(0, len(formas)-1)
+    f = formas[forma_aleatoria](aglomeração)
     
     tela = pygame.display.set_mode((display.TELA_LARGURA, display.TELA_ALTURA))
     relogio = pygame.time.Clock()
     tick_do_relogio = 30
     
     rodando = True
-
+    formas_que_ja_foram = []
+    
     while rodando:
-
+        
         #restartando o player
         if f.colisão == True:
             aglomeração.aglomerar_forma(f)
-            f = formas[random.randint(0, len(formas)-1)](aglomeração)
             
-        #tempo de sincronização do jogo
+            forma_aleatoria = random.randint(0, len(formas)-1)
+            f = formas[forma_aleatoria](aglomeração)
+        
+            formas_que_ja_foram.append(formas[forma_aleatoria])
+            
+            #garantindo que todas as peças aparecem em uma mesma janela de tempo
+            for item in formas_que_ja_foram:
+                if formas.count(item) == 1 and formas_que_ja_foram.count(item) == 2:
+                    formas.pop(formas.index(item))
+            
+            if len(formas) == 0:
+                formas = list(set(formas_que_ja_foram)) 
+                formas_que_ja_foram = []
+            
+        #tempo de sincronização do jogo, velocidade de atuazação de framerate
         relogio.tick(tick_do_relogio)
         f.mover_pbaixo()
 
