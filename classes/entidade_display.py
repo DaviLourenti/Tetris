@@ -1,7 +1,6 @@
 import os
 import pygame
 
-
 TELA_LARGURA = 500
 TELA_ALTURA = 800
 
@@ -10,6 +9,7 @@ IMAGEM_CENARIO = pygame.image.load(os.path.join('imagens', 'cenario.png'))
 
 
 class Cenario:
+    
     LARGURA = IMAGEM_CENARIO.get_width()
     ALTURA = IMAGEM_CENARIO.get_height()
     IMAGEM = IMAGEM_CENARIO

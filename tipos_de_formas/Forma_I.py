@@ -1,6 +1,6 @@
-import entidades_de_blocos
+import classes
 
-class Forma_I(entidades_de_blocos.Forma):
+class Forma_I(classes.Forma):
     def __init__(self, aglomeração):
         super().__init__(225, 250, 225, 275, 225, 300, 225, 325, aglomeração)
     

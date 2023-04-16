@@ -1,14 +1,14 @@
 import pygame
-import display
 import random
-import entidades_de_blocos
+import classes
+import classes.entidade_display as entidade_display
 import tipos_de_formas
 
 
 def main():
-    cenario = display.Cenario(725)
+    cenario = entidade_display.Cenario(725)
 
-    aglomeração = entidades_de_blocos.Aglomeração()
+    aglomeração = classes.Aglomeração()
     formas = [
               tipos_de_formas.Forma_I, 
               tipos_de_formas.Forma_Q, 
@@ -21,7 +21,7 @@ def main():
     forma_aleatoria = random.randint(0, len(formas)-1)
     f = formas[forma_aleatoria](aglomeração)
     
-    tela = pygame.display.set_mode((display.TELA_LARGURA, display.TELA_ALTURA))
+    tela = pygame.display.set_mode((entidade_display.TELA_LARGURA, entidade_display.TELA_ALTURA))
     relogio = pygame.time.Clock()
     tick_do_relogio = 30
     
@@ -87,7 +87,7 @@ def main():
         
         if rodando == True:        
             aglomeração.conferir_linha()
-            display.desenhar_tela(tela, f, cenario, aglomeração)
+            entidade_display.desenhar_tela(tela, f, cenario, aglomeração)
 
 
 

@@ -2,7 +2,7 @@ from random import randint
 from . import entidade_bloco
 class Forma:
     def __init__(self, x1,y1, x2,y2, x3,y3, x4,y4, aglomeração):
-        self.velocidade = 0
+        self.movimento_acomulado = 0
         self.giro = 0
         self.colisão = False
         self.conexão_com_player = True
@@ -109,17 +109,19 @@ class Forma:
             and self.bloco4.y + 25 < 725\
             and self.bool_colisão_y() != True:
             
-                if self.velocidade >= 25:
-                    self.bloco1.y += self.velocidade
-                    self.bloco2.y += self.velocidade
-                    self.bloco3.y += self.velocidade
-                    self.bloco4.y += self.velocidade
-                    self.velocidade = 0
+                if self.movimento_acomulado >= 25:
+                    self.bloco1.y += self.movimento_acomulado
+                    self.bloco2.y += self.movimento_acomulado
+                    self.bloco3.y += self.movimento_acomulado
+                    self.bloco4.y += self.movimento_acomulado
+                    self.movimento_acomulado = 0
+                    
+                    #add um ponto ao rankig
 
-                self.velocidade += 1
+                self.movimento_acomulado += 1
             
-            elif self.velocidade >= 25:
-                self.velocidade = 0
+            elif self.movimento_acomulado >= 25:
+                self.movimento_acomulado = 0
                 self.colisão = True
             else:
-                self.velocidade += 1 #ultimo movimento mesmo depois de colidir
+                self.movimento_acomulado += 1 #permite um ultimo movimento um pouco de colidir definitivamente
