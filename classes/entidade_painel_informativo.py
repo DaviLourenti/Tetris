@@ -1,3 +1,3 @@
-class painel_informativo:
+class Painel_informativo:
     def __init__(self) -> None:
         pass
