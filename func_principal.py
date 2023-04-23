@@ -14,7 +14,7 @@ class classe_principal:
                 tipos_de_formas.Forma_Z, tipos_de_formas.Forma_J, tipos_de_formas.Forma_L
                 ]
         self.proximas_formas = [random.randint(0, len(self.formas)-1) for f in range(0, 3)]
-        self.f_player = self.formas[self.proximas_formas[0]](self.aglomeração_de_formas)
+        self.f_player = self.formas[self.proximas_formas[-1]](self.aglomeração_de_formas)
         
         self.cenario = entidade_display.Cenario(725)
         self.tela = pygame.display.set_mode((entidade_display.TELA_LARGURA, entidade_display.TELA_ALTURA))
@@ -32,13 +32,13 @@ class classe_principal:
         if self.f_player.colisão == True:
             self.aglomeração_de_formas.aglomerar_forma(self.f_player)
             
-            self.proximas_formas.pop(0)
+            self.proximas_formas.pop()
             self.forma_aleatoria = random.randint(0, len(self.formas)-1)
-            self.proximas_formas += [self.forma_aleatoria]
+            self.proximas_formas.append(self.forma_aleatoria)
             
-            self.f_player = self.formas[self.proximas_formas[0]](self.aglomeração_de_formas)
+            self.f_player = self.formas[self.proximas_formas[-1]](self.aglomeração_de_formas)
         
-            self.formas_que_ja_foram.append(self.formas[self.forma_aleatoria])
+            self.formas_que_ja_foram.insert(0, self.formas[self.forma_aleatoria])
             #garantindo que todas as peças aparecem em uma mesma janela de tempo
             def taxa_de_repetição_de_peças(taxa_por_ciclo):
                 for item in self.formas_que_ja_foram:
@@ -112,8 +112,8 @@ class classe_principal:
             ]
             
             self.nomes_proximas_peças = []
-            for i in self.proximas_formas:
-                self.nomes_proximas_peças += [self.nomes_todas_as_peças[i]]
+            for i in range(len(self.proximas_formas)):
+                self.nomes_proximas_peças += [self.nomes_todas_as_peças[self.proximas_formas[-i]]]
               
                 
             entidade_display.desenhar_tela(self.tela, self.f_player, self.cenario, self.aglomeração_de_formas, self.pontos.quantidade, self.nomes_proximas_peças)

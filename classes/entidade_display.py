@@ -40,7 +40,6 @@ def desenhar_tela(tela, Forma, cenario, aglomeração, pontos, nomes_proximas_pe
     texto = FONTE_PONTOS.render(f"Pontuação: {pontos}", 1, (255, 255, 255))
     tela.blit(texto, (TELA_LARGURA - 10 - texto.get_width(), 10))
     
-    texto2 = FONTE_PONTOS.render(f"{nomes_proximas_peças[1]}{nomes_proximas_peças[2]}", 1, (255, 255, 255))
-    tela.blit(texto2, (TELA_LARGURA - 90 - texto.get_width(), 50))
-    
+    texto2 = FONTE_PONTOS.render(f"{nomes_proximas_peças[0]}{nomes_proximas_peças[1]}{nomes_proximas_peças[2]}", 1, (255, 255, 255))
+    tela.blit(texto2, (TELA_LARGURA - 240 - texto.get_width(), 50))
     pygame.display.update()
