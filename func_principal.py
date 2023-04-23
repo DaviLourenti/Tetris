@@ -6,15 +6,15 @@ import tipos_de_formas
 
 class classe_principal:
     def __init__(self) -> None:
-        self.pontos = classes.Ponto
+        self.pontos = classes.Ponto()
     
         self.aglomeração_de_formas = classes.Aglomeração()
         self.formas=[
                 tipos_de_formas.Forma_I, tipos_de_formas.Forma_Q, tipos_de_formas.Forma_S, tipos_de_formas.Forma_T, 
                 tipos_de_formas.Forma_Z, tipos_de_formas.Forma_J, tipos_de_formas.Forma_L
                 ]
-        self.forma_aleatoria = random.randint(0, len(self.formas)-1)
-        self.f_player = self.formas[self.forma_aleatoria](self.aglomeração_de_formas)
+        self.proximas_formas = [random.randint(0, len(self.formas)-1) for f in range(0, 3)]
+        self.f_player = self.formas[self.proximas_formas[0]](self.aglomeração_de_formas)
         
         self.cenario = entidade_display.Cenario(725)
         self.tela = pygame.display.set_mode((entidade_display.TELA_LARGURA, entidade_display.TELA_ALTURA))
@@ -32,11 +32,13 @@ class classe_principal:
         if self.f_player.colisão == True:
             self.aglomeração_de_formas.aglomerar_forma(self.f_player)
             
+            self.proximas_formas.pop(0)
             self.forma_aleatoria = random.randint(0, len(self.formas)-1)
-            self.f_player = self.formas[self.forma_aleatoria](self.aglomeração_de_formas)
+            self.proximas_formas += [self.forma_aleatoria]
+            
+            self.f_player = self.formas[self.proximas_formas[0]](self.aglomeração_de_formas)
         
             self.formas_que_ja_foram.append(self.formas[self.forma_aleatoria])
-            
             #garantindo que todas as peças aparecem em uma mesma janela de tempo
             def taxa_de_repetição_de_peças(taxa_por_ciclo):
                 for item in self.formas_que_ja_foram:
@@ -50,9 +52,18 @@ class classe_principal:
                 self.formas_que_ja_foram = []
 
 
-    def velocidade_de_queda(self): #tempo de sincronização do jogo, velocidade de atuazação de framerate
+    def config_de_queda(self): #tempo de sincronização do jogo, velocidade de atuazação de framerate
         self.taxa_velocidade_de_atualização_do_jogo.tick(self.velocidade_do_jogo)
-        self.f_player.mover_pbaixo()
+        self.f_player.mover_pbaixo(self.pontos)
+        
+        #aceleração aumenta com os pontos
+        if self.pontos.quantidade % 50 == 0 and self.pontos.quantidade < 200:
+            self.taxa_de_aceleração_do_jogo += 25
+            self.pontos.quantidade += 1
+            
+        elif self.pontos.quantidade % 50 == 0:
+            self.taxa_de_aceleração_do_jogo += 5
+            self.pontos.quantidade += 1
 
 
     def interação_com_o_usuário(self):
@@ -70,8 +81,6 @@ class classe_principal:
                         self.f_player.bloco2.baladinha_bloco()
                         self.f_player.bloco3.baladinha_bloco()
                         self.f_player.bloco4.baladinha_bloco()
-                        
-                        self.taxa_de_aceleração_do_jogo += 25
                     
                     if evento.key == pygame.K_RIGHT:
                         self.f_player.mover_direita()
@@ -91,18 +100,31 @@ class classe_principal:
                     self.velocidade_do_jogo = 30 + self.taxa_de_aceleração_do_jogo
     
     
-    def verificar_e_atuaizar_a_tela(self): 
+    def atualizar_tela(self): 
         if self.rodando == True:
-            self.aglomeração_de_formas.conferir_linha()
-            entidade_display.desenhar_tela(self.tela, self.f_player, self.cenario, self.aglomeração_de_formas)
+            
+            if self.aglomeração_de_formas.conferir_linha(self.pontos) == True:
+                self.taxa_de_aceleração_do_jogo += 25*4
+            
+            self.nomes_todas_as_peças = [
+                "Forma_I", "Forma_Q", "Forma_S", "Forma_T",
+                "Forma_Z", "Forma_J", "Forma_L"
+            ]
+            
+            self.nomes_proximas_peças = []
+            for i in self.proximas_formas:
+                self.nomes_proximas_peças += [self.nomes_todas_as_peças[i]]
+              
+                
+            entidade_display.desenhar_tela(self.tela, self.f_player, self.cenario, self.aglomeração_de_formas, self.pontos.quantidade, self.nomes_proximas_peças)
 
 
     def main(self):
         while self.rodando:
             self.restartando_o_player()
-            self.velocidade_de_queda()
+            self.config_de_queda()
             self.interação_com_o_usuário()
-            self.verificar_e_atuaizar_a_tela()
+            self.atualizar_tela()
 
 
 

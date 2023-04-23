@@ -99,7 +99,7 @@ class Forma:
             and self.bloco4.x == self.conjunto_de_blocos[c].x:
                 return True
 
-    def mover_pbaixo(self):
+    def mover_pbaixo(self, classe_pontos):
 
         if self.conexão_com_player == True:
 
@@ -114,10 +114,10 @@ class Forma:
                     self.bloco2.y += self.movimento_acomulado
                     self.bloco3.y += self.movimento_acomulado
                     self.bloco4.y += self.movimento_acomulado
-                    self.movimento_acomulado = 0
                     
-                    #add um ponto ao rankig
-
+                    self.movimento_acomulado = 0
+                    classe_pontos.add_pontos(1)
+                    
                 self.movimento_acomulado += 1
             
             elif self.movimento_acomulado >= 25:

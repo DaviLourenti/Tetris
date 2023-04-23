@@ -31,7 +31,7 @@ class Aglomeração:
         self.indices_da_linha = []
 
 
-    def conferir_linha(self):
+    def conferir_linha(self, classe_pontos):
         self.y_preenchidos = list(set([item.y for item in self.conjunto_de_blocos]))
         
         for c in range(len(self.y_preenchidos)): #verifivação de linha em linha 
@@ -50,8 +50,8 @@ class Aglomeração:
 
                         self.__apagar_linha()
                         self.__puxar_tudo_pra_baixo()
-                        
-                        break
+                        classe_pontos.add_pontos(100)
+                        return True
                     
 
     def desenhar(self, tela):
